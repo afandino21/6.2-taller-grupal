@@ -25,4 +25,9 @@ body {
 */
 #link {
     color: greenyellow;
+
+}
+
+#link:link {
+    color: pink;
 }

@@ -33,6 +33,14 @@ body {
     box-shadow: 2px 2px 10px white;
 }
 
+h1{
+    background-color: rgba(0, 255, 255, 0.582);
+}
+
+p{ 
+    background-color: rgba(9, 255, 0, 0.582) ;
+}
+
 /* cambios al link
 
 

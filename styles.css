@@ -8,7 +8,7 @@ body {
     text-align: center;
 }
 
-.image{
+.image {
     border: 5px solid green;
     border-radius: 10px;
     height: 400px;
@@ -22,4 +22,13 @@ body {
     padding: 5px;
     border-radius: 5px;
     box-shadow: 2px 3px #888888;
+}
+
+
+/* cambios al link
+
+
+*/
+#link {
+    color: greenyellow;
 }

@@ -6,6 +6,7 @@ body {
     font-family: monospace;
     font-size: 1.2em;
     text-align: center;
+    padding: 15px;
 }
 
 .image {
@@ -24,6 +25,9 @@ body {
     box-shadow: 2px 3px #888888;
 }
 
+iframe {
+    padding: 15px;
+}
 
 /* cambios al link
 

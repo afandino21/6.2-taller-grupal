@@ -1,5 +1,5 @@
 
-// Funcion que guarda en userData de localStorage el texto que se agrego
+// Funcion que guarda en userData de localStorage el texto que se agrego en input
 
 document.addEventListener('DOMContentLoaded', () => {
     const saveButton = document.getElementById('buttonText');

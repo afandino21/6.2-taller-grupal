@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h5>${product.title}</h5>
                 <p><strong>Price:</strong> $${product.price}</p>
                 <p>${product.description}</p>
+                <img src="${product.image}" width="100" height="100">
             `;
             productList.appendChild(listItem);
         });

@@ -17,7 +17,7 @@ body {
 header {
     background-color: #333;
     color: white;
-    padding: 10px;
+    padding: 5px;
 }
 
 nav {
@@ -41,11 +41,13 @@ nav button {
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    align-items: center;
 }
 
 main {
     padding: 20px;
 }
+
 
 #container {
     display: grid;
@@ -62,12 +64,9 @@ main {
 
 .result img {
     max-width: 100%;
-    height: auto;
+   
 }
 
-.oculto {
-    display: none;
-}
 
 h2 {
     margin-top: 10px;
@@ -77,13 +76,14 @@ p {
     margin-top: 5px;
 }
 
-#buttonBusqueda {
+.buttonBusqueda {
     background-color: white;
     color: black;
 }
 
-#buttonBusqueda:hover {
+.buttonBusqueda:hover {
     background-color: rgba(255, 255, 255, 0.21);
     border-color: white;
     border-width: 5px;
 }
+

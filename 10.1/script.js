@@ -1,8 +1,16 @@
 const busquedaInput = document.getElementById('busqueda');
 const container = document.getElementById('container');
 const busqueda = document.getElementById('buttonBusqueda');
+const clear = document.getElementById('clearBusqueda');
 const previousButton = document.getElementById('previousPage');
 const nextButton = document.getElementById('nextPage');
+const buscado = localStorage.setItem('buscado', false)
+
+    
+    busqueda.style.display ="block";
+    clear.style.display = "none";
+    previousButton.style.display = "none";
+    nextButton.style.display = "none";
 
 let currentPage = 1;
 const resultsPerPage = 20;
@@ -36,7 +44,8 @@ const updateResults = () => {
         titleElement.textContent = title;
 
         const descriptionElement = document.createElement('p');
-        descriptionElement.classList.add('card-text', 'overflow-auto', 'max-height-100');
+        descriptionElement.classList.add('card-text', 'overflow-auto'); // Aquí usamos solo 'overflow-auto'
+        descriptionElement.style.maxHeight = '100px'; // Establecemos una altura máxima en píxeles
         descriptionElement.innerHTML = description;
 
         cardBody.appendChild(titleElement);
@@ -79,9 +88,20 @@ const fetchResults = () => {
 
 busqueda.addEventListener('click', () => {
     fetchResults();
-    ocultarBotones();
+    previousButton.style.display = "inline-block";
+      nextButton.style.display = "inline-block"
+      clear.style.display = "block";
+      busqueda.style.display ="none";
 }
 );
+busquedaInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      fetchResults();
+      previousButton.style.display = "inline-block";
+      nextButton.style.display = "inline-block";
+      clear.style.display = "block";
+    }
+  });
 
 previousButton.addEventListener('click', () => {
     if (currentPage > 1) {
@@ -97,6 +117,9 @@ nextButton.addEventListener('click', () => {
     }
 });
 
+function limpiarBusqueda(){
+window.location.href = "index.html"
+};
 
 // Codigo Inicial (Tambien funciona)
 

@@ -6,11 +6,11 @@ const previousButton = document.getElementById('previousPage');
 const nextButton = document.getElementById('nextPage');
 const buscado = localStorage.setItem('buscado', false)
 
-    
-    busqueda.style.display ="block";
-    clear.style.display = "none";
-    previousButton.style.display = "none";
-    nextButton.style.display = "none";
+
+busqueda.style.display = "initial";
+clear.style.display = "none";
+previousButton.style.display = "none";
+nextButton.style.display = "none";
 
 let currentPage = 1;
 const resultsPerPage = 20;
@@ -84,24 +84,20 @@ const fetchResults = () => {
         .catch(error => {
             console.error('Error fetching data:', error);
         });
+    previousButton.style.display = "inline-block"; // pasar al css y togglear la clase "oculto"
+    nextButton.style.display = "inline-block" // pasar al css y togglear la clase "oculto"
+    clear.style.display = "inline-block";
 };
 
 busqueda.addEventListener('click', () => {
     fetchResults();
-    previousButton.style.display = "inline-block";
-      nextButton.style.display = "inline-block"
-      clear.style.display = "block";
-      busqueda.style.display ="none";
 }
 );
-busquedaInput.addEventListener('keypress', function(event) {
+busquedaInput.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
-      fetchResults();
-      previousButton.style.display = "inline-block";
-      nextButton.style.display = "inline-block";
-      clear.style.display = "block";
+        fetchResults();
     }
-  });
+});
 
 previousButton.addEventListener('click', () => {
     if (currentPage > 1) {
@@ -117,67 +113,8 @@ nextButton.addEventListener('click', () => {
     }
 });
 
-function limpiarBusqueda(){
-window.location.href = "index.html"
+clear.addEventListener('click', limpiarBusqueda);
+
+function limpiarBusqueda() {
+    window.location.href = "index.html"
 };
-
-// Codigo Inicial (Tambien funciona)
-
-/*
-
-const busquedaInput = document.getElementById('busqueda');
-const container = document.getElementById('container');
-const busqueda = document.getElementById('buttonBusqueda');
-
-busqueda.addEventListener('click', () => {
-    const searchTerm = busquedaInput.value.trim();
-    if (searchTerm === '') {
-        return;
-    }
-
-    const apiUrl = `https://images-api.nasa.gov/search?q=${searchTerm}`;
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            container.innerHTML = ''; // Limpiamos el contenedor antes de agregar nuevos resultados
-
-            const items = data.collection.items;
-            items.forEach(item => {
-                const imageUrl = item.links[0].href;
-                const title = item.data[0].title;
-                const description = item.data[0].description;
-
-                const resultDiv = document.createElement('div');
-                resultDiv.classList.add('result', 'card', 'mb-3'); // Agregamos clases Bootstrap
-
-                const image = document.createElement('img');
-                image.src = imageUrl;
-                image.classList.add('card-img-top'); // Clase Bootstrap para imagen superior
-
-                const cardBody = document.createElement('div');
-                cardBody.classList.add('card-body'); // Clase Bootstrap para cuerpo de tarjeta
-
-                const titleElement = document.createElement('h2');
-                titleElement.classList.add('card-title'); // Clase Bootstrap para título
-                titleElement.textContent = title;
-
-                const descriptionElement = document.createElement('p');
-                descriptionElement.classList.add('card-text', 'overflow-auto', 'max-height-100'); // Clases Bootstrap para descripción con scroll
-                descriptionElement.innerHTML = description;
-
-                cardBody.appendChild(titleElement);
-                cardBody.appendChild(descriptionElement);
-
-                resultDiv.appendChild(image);
-                resultDiv.appendChild(cardBody);
-
-                container.appendChild(resultDiv);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-});
-
-*/

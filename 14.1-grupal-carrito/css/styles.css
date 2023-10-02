@@ -12,9 +12,19 @@
 #productos-container {
     margin: 0 auto;
     text-align: left;
-    width: 500px;
-    height: 200px;
+    max-width: 400px;
+    max-height: 200px;
     overflow-y: scroll;
+}
+
+#factura{
+    padding: 10px;
+    border-radius: 5px;
+    margin: 50px auto;
+    text-align: left;
+    max-width: 350px;
+    background-color: rgba(128, 127, 127, 0.071);
+
 }
 
 @media screen and(max-width: 768px) {

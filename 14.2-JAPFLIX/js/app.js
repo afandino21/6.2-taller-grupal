@@ -85,6 +85,10 @@ document.getElementById('btnBuscar').addEventListener('click', async () => {
         const genresMatch = movie.genres.some(genre => genre.name.toLowerCase().includes(searchTerm));
         return titleMatch || taglineMatch || overviewMatch || genresMatch;
     });
+    if (filteredMovies.length === 0) {
+        alert('No se encontraron películas con ese término de búsqueda.');
+        return;
+    }
     btnLimpiar()
     displayMovies(filteredMovies);
 });

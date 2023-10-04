@@ -23,7 +23,7 @@ function displayMovies(movies) {
         listItem.classList.add('list-group-item');
         listItem.innerHTML = `
         <div type="button" data-bs-toggle="offcanvas" data-bs-target="#${offcanvasId}" aria-controls="${offcanvasId}">
-        <h5>${movie.title}</h5> <a>Puntuación: ${'⭐'.repeat(Math.round(movie.vote_average))} (${(movie.vote_average)})</a>
+        <h5>${movie.title}</h5> <a>${'⭐'.repeat(Math.round(movie.vote_average))} (${(movie.vote_average)})</a>
         <p>${movie.tagline}</p></div>
 
 

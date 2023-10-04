@@ -23,8 +23,9 @@ function displayMovies(movies) {
         listItem.classList.add('list-group-item');
         listItem.innerHTML = `
         <div type="button" data-bs-toggle="offcanvas" data-bs-target="#${offcanvasId}" aria-controls="${offcanvasId}">
-        <h5>${movie.title}</h5> <a>${'⭐'.repeat(Math.round(movie.vote_average))} (${(movie.vote_average)})</a>
-        <p>${movie.tagline}</p></div>
+        <a>${'⭐'.repeat(Math.round(movie.vote_average / 2))} (${(movie.vote_average / 2)})</a>
+        <h5>${movie.title}</h5>
+        <p mb-0>${movie.tagline}</p></div>
 
 
         <div class="offcanvas offcanvas-top text-light" tabindex="-1" id="${offcanvasId}" aria-labelledby="offcanvasTopLabel">
@@ -33,12 +34,12 @@ function displayMovies(movies) {
             <div class="col-lg-3">
                 <h5>${movie.title}</h5>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-7">
                 <p>${movie.overview}</p>
                 <hr>
                 <p id="genres-list">${genresText}</p>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-1">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Mas Info.
@@ -46,18 +47,15 @@ function displayMovies(movies) {
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"> Fecha de lanzamiento: ${movie.release_date}</li>
                         <li class="dropdown-item"> Duración: ${movie.runtime} min.</li>
-                        <li class="dropdown-item"> Presupuesto: ${movie.budget}</li>
-                        <li class="dropdown-item"> Recaudación: ${movie.revenue}</li>
+                        <li class="dropdown-item"> Presupuesto: $${movie.budget}</li>
+                        <li class="dropdown-item"> Recaudación: $${movie.revenue}</li>
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-1">
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
         </div>
-        </div>
-    
-        <div class="offcanvas-body">
         </div>
     </div>
     `;
@@ -72,6 +70,7 @@ function displayMovies(movies) {
 }
 //BUSCADOR
 document.getElementById('btnBuscar').addEventListener('click', async () => {
+
     const searchTerm = document.getElementById('inputBuscar').value.toLowerCase().trim();
     if (!searchTerm) {
         alert('Ingresa un término de búsqueda.');
@@ -86,6 +85,17 @@ document.getElementById('btnBuscar').addEventListener('click', async () => {
         const genresMatch = movie.genres.some(genre => genre.name.toLowerCase().includes(searchTerm));
         return titleMatch || taglineMatch || overviewMatch || genresMatch;
     });
-
+    btnLimpiar()
     displayMovies(filteredMovies);
 });
+
+function btnLimpiar() {
+    const btnLimpiar = document.getElementById("btnLimpiar");
+    btnLimpiar.style.display = 'block';
+    btnLimpiar.style.display = 'inline-block';
+
+}
+
+function limpiar() {
+    window.location.href = 'index.html';
+}

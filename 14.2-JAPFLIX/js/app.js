@@ -16,24 +16,27 @@ function displayMovies(movies) {
 
     movies.forEach(movie => {
 
+        const genresText = movie.genres.map(genre => genre.name).join(' - ');
+        const offcanvasId = `offcanvasTop-${movie.id}`;
+
         const listItem = document.createElement('li');
         listItem.classList.add('list-group-item');
         listItem.innerHTML = `
-        <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-        <h5>${movie.title}</h5> <a>Puntuación: ${'⭐'.repeat(Math.round(movie.vote_average))} (${(movie.vote_average)}) </a>
+        <div type="button" data-bs-toggle="offcanvas" data-bs-target="#${offcanvasId}" aria-controls="${offcanvasId}">
+        <h5>${movie.title}</h5> <a>Puntuación: ${'⭐'.repeat(Math.round(movie.vote_average))} (${(movie.vote_average)})</a>
         <p>${movie.tagline}</p></div>
 
 
-        <div class="offcanvas offcanvas-top text-dark" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <div class="offcanvas offcanvas-top text-light" tabindex="-1" id="${offcanvasId}" aria-labelledby="offcanvasTopLabel">
 
         <div class="row mt-5 mx-5">
             <div class="col-lg-3">
-                <h4>${movie.title}</h4>
+                <h5>${movie.title}</h5>
             </div>
             <div class="col-lg-3">
                 <p>${movie.overview}</p>
                 <hr>
-                <p id="genres-list">Generos</p>
+                <p id="genres-list">${genresText}</p>
             </div>
             <div class="col-lg-3">
                 <div class="dropdown">
@@ -61,9 +64,9 @@ function displayMovies(movies) {
 
 
         lista.appendChild(listItem);
-        const genresList = document.getElementById('genres-list');
-        const genresText = movie.genres.map(genre => genre.name).join(' - ');
-        genresList.textContent = 'Géneros: ' + genresText;
+
+
+
 
     });
 }

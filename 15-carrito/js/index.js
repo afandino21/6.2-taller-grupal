@@ -1,110 +1,142 @@
 let stock = [];
 let totalPrice = 0;
+let cart = [];
 
-fetch("./js/productos.json")
-    .then(response => response.json())
-    .then(data => {
-        stock = data;
-        const productList = document.getElementById("item-list");
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("./js/productos.json")
+        .then(response => response.json())
+        .then(data => {
+            stock = data;
+            const productList = document.getElementById("item-list");
 
-        data.forEach(product => {
-            const divProducto = document.createElement("div");
-            divProducto.classList.add("div-producto");
-            divProducto.classList.add("col-12");
-            divProducto.classList.add("col-lg-4");
-            divProducto.classList.add("col-md-6");
-            divProducto.classList.add("col-sm-12");
+            data.forEach(product => {
+                const divProducto = document.createElement("div");
+                divProducto.classList.add("div-producto");
+                divProducto.classList.add("col-12");
+                divProducto.classList.add("col-lg-4");
+                divProducto.classList.add("col-md-6");
+                divProducto.classList.add("col-sm-12");
 
-            divProducto.innerHTML = `
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title" id="${product.id}">${product.producto}</h5>
-                        <img src="${product.img}" class="card-img-top" alt="Imagen del Producto">              
-                        <p class="card-text">Precio: &#36;${product.precio}  Stock: ${product.cantidad_stock}  </p>
-                        <p class="card-text">${product.descripcion}</p>
-                        <a class="btn btn-primary add-to-cart">Añadir al carrito</a>
+                divProducto.innerHTML = `
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title" id="${product.id}">${product.producto}</h5>
+                            <img src="${product.img}" class="card-img-top" alt="Imagen del Producto">              
+                            <p class="card-text">Precio: &#36;${product.precio}  Stock: <span id="stock-${product.id}">${product.cantidad_stock}</span></p>
+                            <p class="card-text">${product.descripcion}</p>
+                            <a class="btn btn-primary add-to-cart">Añadir al carrito</a>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
 
-            productList.appendChild(divProducto);
-        });
+                productList.appendChild(divProducto);
 
-        const addToCartButtons = document.querySelectorAll('.add-to-cart');
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const productId = button.parentNode.querySelector('.card-title').id;
-                addToCart(productId);
+                const addToCartButtons = divProducto.querySelectorAll('.add-to-cart');
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const productId = button.parentNode.querySelector('.card-title').id;
+                        addToCart(productId);
+                    });
+                });
             });
+        })
+        .catch(error => {
+            console.error("Error al cargar los datos de productos:", error);
         });
-    })
-    .catch(error => {
-        console.error("Error al cargar los datos de productos:", error);
-    });
+});
 
 function addToCart(productId) {
-    const productActual = stock[productId];
-    const cart = document.getElementById('cart-items');
-    const existingCartItem = cart.querySelector(`[data-product-id="${productId}"]`);
+    // Verifica si hay stock disponible
+    const productIndex = parseInt(productId);
+    const productActual = stock[productIndex];
 
-    if (existingCartItem) {
-        // El producto ya está en el carrito, aumenta la cantidad
-        const quantityElement = existingCartItem.querySelector('.quantity');
-        const currentQuantity = parseInt(quantityElement.textContent, 10);
-        const newQuantity = currentQuantity + 1;
-        quantityElement.textContent = newQuantity;
+    if (productActual.cantidad_stock > 0) {
+        // Reduce el stock y agrega el producto al carrito
+        productActual.cantidad_stock -= 1;
 
-        // Actualiza el precio total
-        totalPrice += productActual.precio;
-        let totalCart = document.getElementById("totalCart");
-        totalCart.innerText = `$${totalPrice.toFixed(2)}`;
-    } else {
-        // El producto no está en el carrito, crea un nuevo elemento
-        const cartItem = document.createElement('tr');
-        cartItem.dataset.productId = productId;
-
-        cartItem.innerHTML = `
-                <th>${productActual.producto}</th>
-                <th>${productActual.precio}</th>
-                <th class="quantity">1</th>
-                <th><button class="btn btn-primary delete-btn" data-product-id="${productId}">X</button></th>
-            `;
-
-        cart.appendChild(cartItem);
-
-        // Actualiza el precio total
-        totalPrice += productActual.precio;
-        let totalCart = document.getElementById("totalCart");
-        totalCart.innerText = `$${totalPrice.toFixed(2)}`;
-
-        const deleteButtons = document.querySelectorAll(".delete-btn");
-        deleteButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                const productIdToRemove = this.getAttribute("data-product-id");
-                removeFromCart(productIdToRemove);
+        // Agrega el producto al carrito
+        const cartItem = cart.find(item => item.productId === productId);
+        if (cartItem) {
+            cartItem.quantity += 1;
+        } else {
+            cart.push({
+                productId: productId,
+                quantity: 1,
+                product: productActual
             });
-        });
+        }
+
+        // Actualiza el precio total
+        totalPrice += productActual.precio;
+        let totalCart = document.getElementById("totalCart");
+        totalCart.innerText = `$${totalPrice.toFixed(2)}`;
+
+        // Actualiza la visualización del carrito
+        updateCartDisplay();
+
+        // Actualiza la cantidad de stock en el divProducto
+        const stockElement = document.getElementById(`stock-${productId}`);
+        stockElement.textContent = productActual.cantidad_stock;
+    } else {
+        alert('Producto agotado o no válido.');
+    }
+}
+
+function removeFromCart(productId) {
+    // Busca el producto en el carrito
+    const cartItemIndex = cart.findIndex(item => item.productId === productId);
+
+    if (cartItemIndex !== -1) {
+        const cartItem = cart[cartItemIndex];
+
+        // Decrementa la cantidad en el carrito de a uno
+        if (cartItem.quantity > 1) {
+            cartItem.quantity -= 1;
+        } else {
+            // Si la cantidad es 1, elimina el producto del carrito
+            cart.splice(cartItemIndex, 1);
+        }
+
+        // Incrementa el stock de ese producto
+        const productIndex = parseInt(productId);
+        const productActual = stock[productIndex];
+        productActual.cantidad_stock += 1;
+
+        // Actualiza el precio total
+        totalPrice -= cartItem.product.precio;
+        let totalCart = document.getElementById("totalCart");
+        totalCart.innerText = `$${totalPrice.toFixed(2)}`;
+        totalCart.innerText = totalPrice < 0 ? '$0:00' : `$${totalPrice.toFixed(2)}`;
+
+        // Actualiza la visualización del carrito
+        updateCartDisplay();
+
+        // Actualiza la cantidad de stock en el divProducto
+        const stockElement = document.getElementById(`stock-${productId}`);
+        stockElement.textContent = productActual.cantidad_stock;
     }
 }
 
 
-function removeFromCart(productId) {
-    // Obtén el elemento de la fila que deseas eliminar
-    const cartItem = document.querySelector(`[data-product-id="${productId}"]`);
+function updateCartDisplay() {
+    const cartContainer = document.getElementById('cart-items');
+    cartContainer.innerHTML = ''; // Limpia el contenido actual del carrito
 
-    if (cartItem) {
-        // Obtén el precio del producto que se va a eliminar
-        const productActual = stock[productId];
-        const productPrice = productActual.precio;
+    cart.forEach(cartItem => {
+        const cartItemRow = document.createElement('tr');
 
-        // Resta el precio del producto eliminado del precio total
-        totalPrice -= productPrice;
+        cartItemRow.innerHTML = `
+            <th>${cartItem.product.producto}</th>
+            <th>$${cartItem.product.precio}</th>
+            <th class="quantity">${cartItem.quantity}</th>
+            <th><button class="btn btn-primary delete-btn" data-product-id="${cartItem.productId}">X</button></th>
+        `;
+        cartContainer.appendChild(cartItemRow);
 
-        // Actualiza el precio total en el elemento HTML correspondiente
-        let totalCart = document.getElementById("totalCart");
-        totalCart.innerText = `$${totalPrice.toFixed(2)}`;
-
-        // Elimina el elemento de la fila del carrito
-        cartItem.remove();
-    }
+        const deleteButton = cartItemRow.querySelector(".delete-btn");
+        deleteButton.addEventListener("click", function () {
+            const productIdToRemove = this.getAttribute("data-product-id");
+            removeFromCart(productIdToRemove);
+        });
+    });
 }

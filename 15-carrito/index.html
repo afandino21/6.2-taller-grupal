@@ -25,12 +25,20 @@
                     </table>
                     <div>
                         <!-- Los items seleccionados se agregarán aquí -->
-                    </div>
+                    </div>                                 
                     <table>
                         <tr class="text-center">
                             <th>Total:<span id="totalCart">$0.00</span></th>
                         </tr>
                     </table>
+                    <div class="payment-options mt-3">
+                        <label for="payment-method">Método de Pago:</label>
+                        <select id="payment-method" class="form-select">
+                            <option value="cash">Efectivo</option>
+                            <option value="credit">Crédito</option>
+                            <option value="debit">Débito</option>
+                        </select>
+                    </div>   
                 </div>
             </ul>
 

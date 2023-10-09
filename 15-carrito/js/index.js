@@ -106,7 +106,6 @@ function removeFromCart(productId) {
         totalPrice -= cartItem.product.precio;
         let totalCart = document.getElementById("totalCart");
         totalCart.innerText = `$${totalPrice.toFixed(2)}`;
-        totalCart.innerText = totalPrice < 0 ? '$0:00' : `$${totalPrice.toFixed(2)}`;
 
         // Actualiza la visualización del carrito
         updateCartDisplay();
@@ -140,3 +139,29 @@ function updateCartDisplay() {
         });
     });
 }
+
+// Agrega un event listener al elemento select
+const paymentMethodSelect = document.getElementById('payment-method');
+paymentMethodSelect.addEventListener('change', updateTotal);
+
+// Define una función para actualizar el total
+function updateTotal() {
+    const selectedPaymentMethod = paymentMethodSelect.value;
+    let totalWithDiscount = totalPrice;
+
+    // Calcula el total actualizado dependiendo del método de pago
+    if (selectedPaymentMethod === 'cash') {
+        // Aplica un 10% de descuento si el método de pago es en efectivo
+        totalWithDiscount = totalPrice * 0.9;
+    } else if (selectedPaymentMethod === 'credit') {
+        // Aplica un 7% de aumento si el método de pago es con crédito
+        totalWithDiscount = totalPrice * 1.07;
+    }
+
+    // Actualiza el contenido del elemento span con el nuevo total
+    const totalCart = document.getElementById('totalCart');
+    totalCart.innerText = `$${totalWithDiscount.toFixed(2)}`;
+}
+
+// Llama a la función para actualizar el total inicialmente
+updateTotal();

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito para Matilde</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+        <div class="dropdown">
+            <button class="btn btn-outline-success me-2 dropdown-toggle mx-5" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" data-bs-auto-close="false">
+                🛒
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <!-- Carrito de compras -->
+                <div id="cart" class="text-center">
+                    <h2>Carrito de compras</h2>
+                    <p>Sus productos elegidos</p>
+                    <table id="cart-items">
+                        <tr class="text-center">
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </table>
+                    <div>
+                        <!-- Los items seleccionados se agregarán aquí -->
+                    </div>
+                    <table>
+                        <tr class="text-center">
+                            <th>Total: </th>
+                            <th id="totalCart">0</th>
+                        </tr>
+                    </table>
+                </div>
+            </ul>
+
+        </div>
+    </nav>
+    <h1 class="mt-5 text-center">Lista de Productos</h1>
+    <div class="container">
+        <div class="row" id="item-list"></div>
+    </div>
+
+
+
+
+
+
+
+    <div id="carrito">
+        <!-- Aquí se mostrarán los productos agregados al carrito -->
+    </div>
+
+
+    </main>
+    </div><!-- Comentarios -->
+
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.card {
+    margin: 10px auto;
+}
+
+table {
+    margin: 0 auto;
+}
+
+@media screen and(max-width: 768px) {
+    /*Estilo para tablets*/
+}
+
+@media screen and(max-width: 480px) {
+    /*Estilo para moviles*/
+}
+
+.card-img-top {
+    max-height: 15rem;
+    max-width: 15rem;
+}
+
+.dropdown-menu.show {
+    width: 500px;
+    padding: 30px;
+    /* Alto del elemento */
+    overflow-y: auto;
+    /* Barras de desplazamiento vertical cuando sea necesario */
+    max-height: 300px;
+    /* Alto máximo */
+}
+
+.dropdown {
+    top: 30px;
+    z-index: 9999;
+    position: fixed;
+
+}
+
+#navbar {
+    background-color: rgba(250, 235, 215, 0) !important;
+}
+
+th {
+    padding-left: 30px;
+}

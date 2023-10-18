@@ -44,7 +44,7 @@ function validatePassword1() {
 function validatePassword2() {
     const password1Input = document.getElementById("password1");
     const password2Input = document.getElementById("password2");
-    if (password1Input.value !== password2Input.value) {  // || password1Input.value === "" ESTO FUNCIONA si password1 es vacia pero rompe en general 
+    if (password1Input.value !== password2Input.value || password1Input.value === "") {  // || password1Input.value === "" ESTO FUNCIONA si password1 es vacia pero rompe en general 
         password2Input.classList.add("is-invalid");
     } else {
         password2Input.classList.remove("is-invalid");

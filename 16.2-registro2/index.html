@@ -21,31 +21,31 @@
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre">
+              <input type="text" class="form-control" id="nombre" required>
               <div class="invalid-feedback">Este campo no puede estar vacío.</div>
             </div>
 
             <div class="col-sm-6">
               <label for="apellido" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="apellido">
+              <input type="text" class="form-control" id="apellido" required>
               <div class="invalid-feedback">Este campo no puede estar vacío.</div>
             </div>
 
             <div class="col-12">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" value="support@example.com">
+              <input type="email" class="form-control" id="email" value="support@example.com" required>
               <div class="invalid-feedback">El Email debe tener un formato válido.</div>
             </div>
 
             <div class="col-sm-6">
               <label for="password1" class="form-label">Contraseña</label>
-              <input type="password" minlength="6" class="form-control" id="password1">
+              <input type="password" minlength="6" class="form-control" id="password1" required>
               <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
             </div>
 
             <div class="col-sm-6">
               <label for="password2" class="form-label">Repetir contraseña</label>
-              <input type="password" minlength="6" class="form-control" id="password2">
+              <input type="password" minlength="6" class="form-control" id="password2" required>
               <div class="feedback" id="password2-feedback"></div>
               <div class="invalid-feedback">Las contraseñas no coinciden.</div>
             </div>
@@ -53,13 +53,14 @@
             <div class="col-sm-12">
               <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#modalTerminos"
                 id="terminos">Términos del servicio</button>
+              <p id="mensajeTerminos" style="color: red; display: inline-block;"></p>
             </div>
 
-            <button class="btn btn-primary" type="submit" id="botonRegistro">Registrarme</button>
+            <button class="btn btn-primary" type="submit" onclick="validateForm()">Registrarme</button>
+            <div id="resultado-validacion"></div>
           </div>
         </div>
       </form>
-
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -78,15 +79,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Aceptas sacrificar a tu primogenito ante el Dios del Sol, prometes dejar de beber alcohol
-            solo podras consumir sangre de cabra fermentada, el queso esta prohibido rotundamente. Asumes que aceptando
-            los terminos
-            y condiciones nosotros podremos utilizar tus organos para las parrilladas de los domingos santos.
-          </p>
+          <p>Estos Términos y Condiciones de uso constituyen un acuerdo legal entre usted como usuario y [Nombre de la
+            Empresa] como proveedor de servicios. Al acceder o utilizar nuestros servicios, usted acepta cumplir con
+            estos términos.</p>
         </div>
         <div class="modal-footer">
           <div class="form-check">
-            <input type="checkbox" class="form-check-input">
+            <input id="terminos-check" type="checkbox" class="form-check-input">
             <label class="form-check-label" for="terminos">Acepto los términos y condiciones del servicio.</label>
           </div>
         </div>

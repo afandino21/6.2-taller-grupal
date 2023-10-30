@@ -1,7 +1,6 @@
 const imageContainer = document.getElementById("image-container");
 
-
-const json = "/DATA.json"
+const json = "./js/DATA.json"
 
 fetch(json)
     .then((response) => response.json())
@@ -12,10 +11,15 @@ fetch(json)
             imageDiv.classList.add("image-block", "col-sm-4");
             imageDiv.style.background = `url(${item.imageURL}) no-repeat center top`;
             imageDiv.style.backgroundSize = "cover";
-
+            imageDiv.addEventListener("click", () => {
+                // Aquí guardarás el ID del producto en el localStorage
+                localStorage.setItem("selectedProductID", item.id);
+                console.log(localStorage.getItem("selectedProductID", item.id));
+                window.location.href = "info-products.html";
+            });
             // Crear un párrafo con la descripción
             const description = document.createElement("p");
-            description.textContent = item.description;
+            description.textContent = item.country;
 
             // Agregar el párrafo al div de la imagen
             imageDiv.appendChild(description);

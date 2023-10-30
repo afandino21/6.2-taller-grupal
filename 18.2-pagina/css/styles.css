@@ -22,3 +22,9 @@
     background-color: rgba(3, 3, 3, 0.5);
     color: white;
 }
+
+#profileImage {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Esto evita que la imagen se distorsione */
+  }

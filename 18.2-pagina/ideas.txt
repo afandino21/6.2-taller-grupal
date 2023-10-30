@@ -1,0 +1,66 @@
+Ideas para la página:
+
+1) IDEAS
+ecommerse?
+algo nuevo: 
+
+        retiros espirituales
+        Destinos Turisticos -- esta elegimos
+        pagina para gatitos
+        para la macumba del gatito
+
+
+2) Estructura general de la página
+DESTINOS TURISTICOS
+
++Pagina Principal 
+Descripcion: 
+-Imagenes grandes de los viajes, titulo: destino 
+-Barra de busqueda
+
++Perfil
+-log-In / log-out
+-Datos de usuario: 
+    Nombre
+    Apellido
+    telefono
+    mail
+    foto_de_perfil
+
++Info de Producto
+- Descripcion general de un viaje particular
+- Boton compra de viaje
+- Imagen de fondo del paisaje difuminada o algo 
+
+3) Estructura de los datos JSON
+JSON del producto:adaptar
+"id": 01,
+"destination_name":"Mabuhay",
+"country":"Philippines",
+"region":"North America",
+"climate":"Mediterranean",
+"attractions":"descripcion atracciones",
+"hotel_name":"Browsecat",
+"hotel_rating":4,
+"hotel_price":169,
+"travel_duration":9,
+"activities": ....
+"img_URL": ["URL BackGround","URL Imagen Principal"]
+
+
+4) Estructura del directorio
+css/
+    styles.css
+js/
+    products.js
+data/
+    /img 
+        (archivos imagen)
+    MOCK_DATA.json
+index.html
+products.html
+profile.html
+
+
+
+

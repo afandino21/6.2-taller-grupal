@@ -3,7 +3,7 @@
     background-color: black;
     padding: 0px;
     margin: 0px;
-    height: 200px;
+    height: 300px;
     text-align: center;
     vertical-align: bottom;
 }
@@ -27,4 +27,25 @@
     width: 150px;
     height: 150px;
     object-fit: cover; /* Esto evita que la imagen se distorsione */
-  }
+}
+
+/* Aplica estilo personalizado para ocultar las flechas en el input de tipo número */
+input[type="number"] {
+    -webkit-appearance: textfield; /* Para Safari */
+    -moz-appearance: textfield; /* Para Firefox */
+    appearance: textfield;
+}
+
+/* Aplica un estilo personalizado para los controles up y down en Firefox */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Puede ser necesario ajustar el margen según tus necesidades */
+}
+
+/* Aplica un estilo personalizado para los controles up y down en otros navegadores */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}

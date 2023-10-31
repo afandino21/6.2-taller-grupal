@@ -15,19 +15,25 @@ fetch(productURL)
     var productSelected = productData[selectedProductID];
     const containerInfoProducts = document.getElementById("infoProducts");
     containerInfoProducts.innerHTML = `
-
-        <h1 class="text-center">¡Tu Próximo Viaje!</h1>
-        <p><strong>Destino:</strong>${productSelected.destination_name}</p>
-        <p><strong>País:</strong>${productSelected.country}</p>
-        <p><strong>Región:</strong> ${productSelected.region}</p>
-        <p><strong>Clima:</strong>${productSelected.climate}</p>
-        <p><strong>Atracciones:</strong>${productSelected.attractions}</p>
-        <p><strong>Hotel:</strong>${productSelected.hotel_name}</p>
-        <p><strong>Rating del Hotel:</strong>${productSelected.hotel_rating}</p>
-        <p><strong>Precio del Hotel:</strong>${productSelected.price}</p>
-        <p><strong>Duración del Viaje:</strong>${productSelected.travel_duration}</p>
-        <p><strong>Actividades:</strong> ${productSelected.activities}</p>
-        <center><img class="w-75" src="${productSelected.imageURL}"></center>
+    <div class="container mt-4">
+        <div class="text-center m-4">
+        <img src="${productSelected.imageURL}" class="img-fluid" alt="Imagen del destino">
+    </div>
+        <div class="card">
+            <div class="card-body">
+            <p><strong>Destination:</strong> ${productSelected.destination_name}</p>
+            <p><strong>Country:</strong> ${productSelected.country}</p>
+            <p><strong>Region:</strong> ${productSelected.region}</p>
+            <p><strong>Climate:</strong> ${productSelected.climate}</p>
+            <p><strong>Attractions:</strong> ${productSelected.attractions}</p>
+            <p><strong>Hotel:</strong> ${productSelected.hotel_name}</p>
+            <p><strong>Hotel Rating:</strong> ${productSelected.hotel_rating}</p>
+            <p><strong>Hotel Price:</strong> $${productSelected.hotel_price}</p>
+            <p><strong>Travel Duration:</strong> ${productSelected.travel_duration} days</p>
+            <p><strong>Activities:</strong> ${productSelected.activities}</p>            
+            </div>
+        </div>
+    </div>
 
     `;
 

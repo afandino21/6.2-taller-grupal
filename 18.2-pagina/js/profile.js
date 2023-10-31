@@ -22,13 +22,14 @@ function mostrarValoresDesdeLocalStorage() {
         <center class="m-2">
           ${profileImage.outerHTML}
           <input type="file" id="imageInput" accept="image/*" style="display: none;"><br>
-          <button class="m-2" id="changeImageBtn">Cambiar Imagen</button>
+          <button class="mt-2 btn" id="changeImageBtn">Cambiar Imagen</button>
         </center>
-        <h1 class="text-center">${datos.nombre} ${datos.apellido}</h1>
+        <h1 class="text-center m-3">${datos.nombre} ${datos.apellido}</h1>
         <ul class="list-group">
           <li class="list-group-item">Teléfono: ${datos.numCelular}</li>
           <li class="list-group-item">Email: ${datos.email}</li>
         </ul>
+        <center><button class="btn btn-danger mt-5" onclick="logout()">Cerrar sesión</button></center>
       `;
     } else {
       console.log("No hay valores almacenados en el localStorage.");

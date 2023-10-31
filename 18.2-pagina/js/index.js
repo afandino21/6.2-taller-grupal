@@ -8,7 +8,7 @@ fetch(json)
         data.forEach((item, index) => {
             // Crear un div para la imagen
             const imageDiv = document.createElement("div");
-            imageDiv.classList.add("image-block", "col-sm-4");
+            imageDiv.classList.add("image-block", "col-sm-4", "mt-5");
             imageDiv.style.background = `url(${item.imageURL}) no-repeat center top`;
             imageDiv.style.backgroundSize = "cover";
             imageDiv.addEventListener("click", () => {

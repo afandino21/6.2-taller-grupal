@@ -30,7 +30,7 @@ function cambiarInPorOut() {
 function cambiarOutPorIn(){
     var claseLogin = document.querySelectorAll(".btnlogin");
     for (var i = 0; i < claseLogin.length; i++) {
-        claseLogin[i].textContent = "Login";
+        claseLogin[i].textContent = "Sing-In";
 
       // Agregar un controlador de eventos de clic para redirigir a profile.html
         claseLogin[i].addEventListener("click", function() {

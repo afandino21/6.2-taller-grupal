@@ -15,7 +15,7 @@
     },
     {
         "id": 1,
-        "destination_name": "San Jose",
+        "destination_name": "San Fernando",
         "country": "Philippines",
         "region": "Asia",
         "climate": "Tropical",
@@ -124,19 +124,5 @@
         "travel_duration": 5,
         "imageURL": "https://images.unsplash.com/photo-1596306499398-8d88944a5ec4?auto=format&fit=crop&q=80&w=2012&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "activities": "Relax in thermal spas, indulge in mud baths, and explore local culture."
-    },
-    {
-        "id": 9,
-        "destination_name": "Tingsryd",
-        "country": "Sweden",
-        "region": "Europe",
-        "climate": "Temperate",
-        "attractions": "Swedish lakes, outdoor adventures, and cozy cabins.",
-        "hotel_name": "Swedish Cabin Getaway",
-        "hotel_rating": 3,
-        "hotel_price": 150,
-        "travel_duration": 7,
-        "imageURL": "https://images.unsplash.com/photo-1562263075-da00b5209d88?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "activities": "Enjoy outdoor activities, explore Swedish lakes, and stay in cozy cabins."
     }
 ]

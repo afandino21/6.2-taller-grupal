@@ -29,7 +29,7 @@ function mostrarValoresDesdeLocalStorage() {
           <li class="list-group-item">Teléfono: ${datos.numCelular}</li>
           <li class="list-group-item">Email: ${datos.email}</li>
         </ul>
-        <center><button class="btn btn-danger mt-5" onclick="logout()">Cerrar sesión</button></center>
+        <center><button class="btn btn-danger mt-5" onclick="logout()">Sing-Off</button></center>
       `;
     } else {
       console.log("No hay valores almacenados en el localStorage.");

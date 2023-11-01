@@ -18,48 +18,22 @@ function validateInput() {
     } else {
         btnPost.disabled = false;
     }
-}
-
-inputPostNombre.addEventListener('input', validateInput);
-inputPostApellido.addEventListener('input', validateInput);
-
-
-// document.getElementById('inputPostNombre').addEventListener('input', () => {
-//     if (inputPostNombre.value === "" || inputPostApellido.value === "") {
-//         btnPost.disabled = true;
-//     } else {
-//         btnPost.disabled = false;
-//     }
-// });
-
-// document.getElementById('inputPostApellido').addEventListener('input', () => {
-
-//     if (inputPostNombre.value === "" || inputPostApellido.value === "") {
-//         btnPost.disabled = true;
-//     } else {
-//         btnPost.disabled = false;
-//     }
-// })
-
-document.getElementById('inputPutId').addEventListener('input', () => {
     if (inputPutId.value === "") {
         btnPut.disabled = true;
-        console.log('cambio a inhabilitado');
     } else {
         btnPut.disabled = false;
-
-        console.log('cambio a habilitado');
     }
-})
-
-document.getElementById('inputDelete').addEventListener('input', () => {
-    if (inputDelete === "") {
-
+    if (inputDelete.value === "") {
         btnDelete.disabled = true;
     } else {
         btnDelete.disabled = false;
     }
-})
+}
+
+inputPostNombre.addEventListener('input', validateInput);
+inputPostApellido.addEventListener('input', validateInput);
+inputPutId.addEventListener('input', validateInput);
+inputDelete.addEventListener('input', validateInput);
 
 
 // Buscar Registro
@@ -207,6 +181,7 @@ btnDelete.addEventListener('click', () => {
                     // Manejar el error y mostrar una alerta
                     alert("Usuario no encontrado");
                 }
+
             })
             .catch(error => {
                 // Manejar el error y mostrar una alerta

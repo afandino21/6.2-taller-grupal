@@ -13,7 +13,7 @@ let inputPutId = document.getElementById("inputPutId");
 let inputDelete = document.getElementById("inputDelete");
 
 function validateInput() {
-    if (inputPostNombre.value === "" || inputPostApellido.value === "") {
+    if (inputPostNombre.value.trim() === "" || inputPostApellido.value.trim() === "") {
         btnPost.disabled = true;
     } else {
         btnPost.disabled = false;
@@ -48,6 +48,14 @@ botonGet1.addEventListener('click', () => {
 btnPost.addEventListener('click', () => {
     const inputPostNombre = document.getElementById("inputPostNombre").value;
     const inputPostApellido = document.getElementById("inputPostApellido").value;
+    const alertError = document.getElementById("alert-error");
+
+    if (inputPostNombre.trim() === "" && inputPostApellido.trim() === ""){
+        alertError.classList.remove("fade")
+    }else{
+        
+        alertError.classList.add("fade")
+
     const ruta = '/users'; // Ruta a la que deseas agregar un elemento
     const elementoAgregado = {
         // Datos del elemento que deseas agregar
@@ -94,15 +102,19 @@ btnPost.addEventListener('click', () => {
 
             alert("Error al agregar nuevo usuario.");
         });
+    }
 });
 
 // Modificar Registro
-
 // Listener para boton Modificar
 btnPut.addEventListener('click', () => {
     inputPutId = document.getElementById("inputPutId").value;
     let inputPutNombre = document.getElementById("inputPutNombre").value;
     let inputPutApellido = document.getElementById("inputPutApellido").value;
+    const alertError = document.getElementById("alert-error");
+    alertError.classList.add("fade");
+// Verificar si el atributo existe antes de intentar eliminarlo
+
     fetch(`https://6542337bf0b8287df1ffada7.mockapi.io/users/${inputPutId}`)
         .then(response => {
             if (!response.ok) {
@@ -117,7 +129,8 @@ btnPut.addEventListener('click', () => {
         })
         .catch(error => {
             // Muestra una alerta al usuario
-            alert("Usuario no encontrado.");
+            //alert("Usuario no encontrado.");
+            alertError.classList.remove("fade");
         });
 });
 // Listener para boton Guardar
@@ -155,7 +168,8 @@ btnSendChanges.addEventListener('click', () => {
                 console.log(data);
             })
             .catch(error => {
-                alert("Usuario no encontrado.");
+                //alert("Usuario no encontrado.");
+                alertError.classList.remove("fade");
             });
     } else {
         alert("Por favor, ingrese un ID válido para la modificación.");
@@ -165,6 +179,8 @@ btnSendChanges.addEventListener('click', () => {
 // ELIMINAR
 btnDelete.addEventListener('click', () => {
     const userId = document.getElementById("inputDelete").value;
+    const alertError = document.getElementById("alert-error");
+    alertError.classList.add("fade");
 
     if (userId) {
         const ruta = `/users/${userId}`; // Ruta con el ID del usuario a eliminar
@@ -179,7 +195,8 @@ btnDelete.addEventListener('click', () => {
                     showList("");
                 } else {
                     // Manejar el error y mostrar una alerta
-                    alert("Usuario no encontrado");
+                    //alert("Usuario no encontrado");
+                    alertError.classList.remove("fade");
                 }
 
             })
@@ -213,6 +230,8 @@ function showList(userId) {
                 console.log('No se pudieron cargar los datos');
             });
     } else {
+        const alertError = document.getElementById("alert-error");
+
         fetch(`https://6542337bf0b8287df1ffada7.mockapi.io/users/${userId}`)
             .then(response => {
                 if (!response.ok) {
@@ -228,10 +247,12 @@ function showList(userId) {
                 LASTNAME: ${data.lastname}
             `;
                 results.innerText = texto;
+                alertError.classList.add("fade");
             })
             .catch(error => {
                 // Muestra una alerta al usuario
-                alert("Usuario no encontrado.");
+                //alert("Usuario no encontrado.");
+                alertError.classList.remove("fade");
             });
     }
 };

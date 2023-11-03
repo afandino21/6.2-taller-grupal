@@ -18,11 +18,11 @@ function validateInput() {
     } else {
         btnPost.disabled = false;
     }
-    if (inputPutId.value === "") {
-        btnPut.disabled = true;
-    } else {
-        btnPut.disabled = false;
-    }
+    //if (inputPutId.value === "") {
+    //    btnPut.disabled = true;
+    //} else {
+    //    btnPut.disabled = false;
+    //}
     if (inputDelete.value === "") {
         btnDelete.disabled = true;
     } else {
@@ -106,14 +106,30 @@ btnPost.addEventListener('click', () => {
 });
 
 // Modificar Registro
+inputPutId.addEventListener('input', () => {
+    const userId = inputPutId.value; // Obtén el valor del input
+
+    // Realiza la solicitud Fetch para comprobar si la ID existe en la API
+    fetch(`https://6542337bf0b8287df1ffada7.mockapi.io/users/${userId}`)
+        .then(response => {
+            if (response.ok) {
+                // Si la ID existe, habilita el botón
+                btnPut.disabled = false;
+            } else {
+                // Si la ID no existe, deshabilita el botón
+                btnPut.disabled = true;
+            }
+        })
+
+});
+// Listener para boton Modificar
 // Listener para boton Modificar
 btnPut.addEventListener('click', () => {
-    inputPutId = document.getElementById("inputPutId").value;
+    const inputPutId = document.getElementById("inputPutId").value;
     let inputPutNombre = document.getElementById("inputPutNombre").value;
     let inputPutApellido = document.getElementById("inputPutApellido").value;
     const alertError = document.getElementById("alert-error");
     alertError.classList.add("fade");
-// Verificar si el atributo existe antes de intentar eliminarlo
 
     fetch(`https://6542337bf0b8287df1ffada7.mockapi.io/users/${inputPutId}`)
         .then(response => {
@@ -133,6 +149,7 @@ btnPut.addEventListener('click', () => {
             alertError.classList.remove("fade");
         });
 });
+
 // Listener para boton Guardar
 btnSendChanges.addEventListener('click', () => {
     let inputPutId = document.getElementById("inputPutId").value;
@@ -166,6 +183,9 @@ btnSendChanges.addEventListener('click', () => {
             .then(data => {
                 // Mostrar el resultado de la modificación
                 console.log(data);
+
+                // Habilita el botón después de una modificación exitosa
+                btnPut.disabled = false;
             })
             .catch(error => {
                 //alert("Usuario no encontrado.");
@@ -175,7 +195,6 @@ btnSendChanges.addEventListener('click', () => {
         alert("Por favor, ingrese un ID válido para la modificación.");
     }
 });
-
 // ELIMINAR
 btnDelete.addEventListener('click', () => {
     const userId = document.getElementById("inputDelete").value;

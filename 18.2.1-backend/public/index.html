@@ -73,17 +73,18 @@
     <div class="alert alert-danger fade" id="alert-error" role="alert">
         Algo salió mal...
     </div>
-    <div class="modal fade" tabindex="-1" id="dataModal" >
+    <div class="modal fade" tabindex="-1" id="dataModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <label for="inputPutNombre">Nombre:</label>
-                    <input type="text" id="inputPutNombre" class="form-control my-1">
+                    <input type="text" id="inputPutNombre" class="form-control my-1" required>
                     <label for="inputPutApellido">Apellido:</label>
-                    <input type="text" id="inputPutApellido" class="form-control my-1">
+                    <input type="text" id="inputPutApellido" class="form-control my-1" required>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        id="btnCancelarModal">Cancelar</button>
                     <button type="button" class="btn btn-primary" id="btnSendChanges"
                         data-bs-dismiss="modal">Guardar</button>
                 </div>

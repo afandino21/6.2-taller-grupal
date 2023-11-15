@@ -18,11 +18,11 @@ function validateInput() {
     } else {
         btnPost.disabled = false;
     }
-    //if (inputPutId.value === "") {
-    //    btnPut.disabled = true;
-    //} else {
-    //    btnPut.disabled = false;
-    //}
+    if (inputPutId.value === "") {
+        btnPut.disabled = true;
+    } else {
+        btnPut.disabled = false;
+    }
     if (inputDelete.value === "") {
         btnDelete.disabled = true;
     } else {
@@ -48,21 +48,12 @@ botonGet1.addEventListener('click', () => {
 btnPost.addEventListener('click', () => {
     const inputPostNombre = document.getElementById("inputPostNombre").value;
     const inputPostApellido = document.getElementById("inputPostApellido").value;
-    const alertError = document.getElementById("alert-error");
-
-    if (inputPostNombre.trim() === "" && inputPostApellido.trim() === ""){
-        alertError.classList.remove("fade")
-    }else{
-        
-        alertError.classList.add("fade")
-
-    const ruta = '/users'; // Ruta a la que deseas agregar un elemento
+    const ruta = '/users';
     const elementoAgregado = {
         // Datos del elemento que deseas agregar
         name: inputPostNombre,
         lastname: inputPostApellido,
     };
-
     // Configura las opciones para la solicitud POST
     const opciones = {
         method: 'POST', // Método de solicitud, generalmente POST para agregar un elemento
@@ -71,10 +62,8 @@ btnPost.addEventListener('click', () => {
         },
         body: JSON.stringify(elementoAgregado), // Convierte el objeto a formato JSON
     };
-
     // Combina la URL base con la ruta para obtener la URL completa
     const urlCompleta = url + ruta;
-
     // Realiza la solicitud Fetch
     fetch(urlCompleta, opciones)
         .then(response => {
@@ -94,44 +83,28 @@ btnPost.addEventListener('click', () => {
 
         `;
             results.innerText = texto;
-
             showList("");
         })
         .catch(error => {
             console.error('Error:', error);
-
             alert("Error al agregar nuevo usuario.");
         });
-    }
 });
 
 // Modificar Registro
-inputPutId.addEventListener('input', () => {
-    const userId = inputPutId.value; // Obtén el valor del input
 
-    // Realiza la solicitud Fetch para comprobar si la ID existe en la API
-    fetch(`https://6542337bf0b8287df1ffada7.mockapi.io/users/${userId}`)
-        .then(response => {
-            if (response.ok) {
-                // Si la ID existe, habilita el botón
-                btnPut.disabled = false;
-            } else {
-                // Si la ID no existe, deshabilita el botón
-                btnPut.disabled = true;
-            }
-        })
-
-});
-// Listener para boton Modificar
 // Listener para boton Modificar
 btnPut.addEventListener('click', () => {
-    const inputPutId = document.getElementById("inputPutId").value;
-    let inputPutNombre = document.getElementById("inputPutNombre").value;
-    let inputPutApellido = document.getElementById("inputPutApellido").value;
+    const inputPutId = document.getElementById("inputPutId");
+    let inputPutNombre = document.getElementById("inputPutNombre");
+    inputPutNombre.value = "";
+    let inputPutApellido = document.getElementById("inputPutApellido");
+    inputPutApellido.value = "";
+    let btnCancelarModal = document.getElementById('btnCancelarModal');
+    let boolCancelModal = false;
     const alertError = document.getElementById("alert-error");
     alertError.classList.add("fade");
-
-    fetch(`https://6542337bf0b8287df1ffada7.mockapi.io/users/${inputPutId}`)
+    fetch(`https://6542337bf0b8287df1ffada7.mockapi.io/users/${inputPutId.value}`)
         .then(response => {
             if (!response.ok) {
                 // Si la respuesta del servidor no es exitosa, lanza un error
@@ -140,29 +113,34 @@ btnPut.addEventListener('click', () => {
             return response.json();
         })
         .then(data => {
-            document.getElementById("inputPutNombre").value = data.name;
-            document.getElementById("inputPutApellido").value = data.lastname;
+            inputPutNombre.value = data.name;
+            inputPutApellido.value = data.lastname;
         })
-        .catch(error => {
-            // Muestra una alerta al usuario
-            //alert("Usuario no encontrado.");
-            alertError.classList.remove("fade");
+        .catch(_ => {
+
+            setTimeout(() => {
+                console.log("Usuario no encontrado");
+                btnCancelarModal.click();
+                alertError.classList.remove("fade");
+            }, 500);
+            setTimeout(() => {
+                alertError.classList.add("fade");
+            }, 2000);
         });
 });
 
 // Listener para boton Guardar
 btnSendChanges.addEventListener('click', () => {
     let inputPutId = document.getElementById("inputPutId").value;
-    let inputPutNombre = document.getElementById("inputPutNombre").value;
-    let inputPutApellido = document.getElementById("inputPutApellido").value;
+    let inputPutNombre = document.getElementById("inputPutNombre").value.trim();
+    let inputPutApellido = document.getElementById("inputPutApellido").value.trim();
 
-    if (inputPutId) {
+    if (inputPutId && inputPutNombre && inputPutApellido) {
         const ruta = `/users/${inputPutId}`; // Ruta con el ID del usuario a modificar
         const updatedUser = {
             name: inputPutNombre,
             lastname: inputPutApellido,
         };
-
         const opciones = {
             method: 'PUT', // Método de solicitud
             headers: {
@@ -171,7 +149,6 @@ btnSendChanges.addEventListener('click', () => {
             body: JSON.stringify(updatedUser), // Convierte el objeto a formato JSON
         };
         const urlCompleta = url + ruta;
-
         fetch(urlCompleta, opciones)
             .then(response => {
                 if (!response.ok) {
@@ -192,7 +169,7 @@ btnSendChanges.addEventListener('click', () => {
                 alertError.classList.remove("fade");
             });
     } else {
-        alert("Por favor, ingrese un ID válido para la modificación.");
+        alert("Por favor, ingrese datos validos para la modificación.");
     }
 });
 // ELIMINAR
@@ -216,8 +193,10 @@ btnDelete.addEventListener('click', () => {
                     // Manejar el error y mostrar una alerta
                     //alert("Usuario no encontrado");
                     alertError.classList.remove("fade");
+                    setTimeout(() => {
+                        alertError.classList.add("fade");
+                    }, 2000);
                 }
-
             })
             .catch(error => {
                 // Manejar el error y mostrar una alerta
@@ -226,7 +205,7 @@ btnDelete.addEventListener('click', () => {
     }
 });
 
-
+// Renderizar lista
 function showList(userId) {
     if (userId === "") {
         fetch(url + "users")
@@ -234,7 +213,6 @@ function showList(userId) {
                 return response.json();
             })
             .then(data => {
-
                 let texto = "";
                 data.forEach(item => {
                     texto += `ID: ${item.id}
@@ -243,14 +221,12 @@ function showList(userId) {
                 `;
                 });
                 results.innerText = texto;
-
             })
             .catch(error => {
                 console.log('No se pudieron cargar los datos');
             });
     } else {
         const alertError = document.getElementById("alert-error");
-
         fetch(`https://6542337bf0b8287df1ffada7.mockapi.io/users/${userId}`)
             .then(response => {
                 if (!response.ok) {
@@ -275,20 +251,3 @@ function showList(userId) {
             });
     }
 };
-
-// function validateID(userId) {
-//     let largoRegistro = 0;
-//     fetch(url + "users")
-//         .then(response => {
-//             return response.json();
-//         })
-//         .then(data => {
-//             largoRegistro = data.length;
-//             if (userId > largoRegistro) {
-//                 alert("Error, usuario no existente.");
-//             }
-//         })
-// }
-// validateID(50);
-
-
